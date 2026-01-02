@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <button onclick="ping()">Click to Test</button>
+
+    <script>
+      function ping() {
+        fetch("http://192.168.0.50:5000/ping", {
+          method: "POST",
+          body: "Hello world",
+        });
+        alert("已送出！");
+      }
+    </script>
+  </body>
+</html>
