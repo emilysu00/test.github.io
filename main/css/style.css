@@ -1,0 +1,1044 @@
+:root {
+  --stage-w: 1080px;
+  --stage-h: 1920px;
+  --bg: #fafafa;
+  --c-primary: #242424;
+  --c-secondary: #696969;
+  --c-tertiary: #858585;
+  --c-quaternary: #9a9a9a;
+
+  /* UI tokens */
+  --text: var(--c-primary);
+  --text-muted: var(--c-secondary);
+  --text-subtle: var(--c-tertiary);
+  --text-faint: var(--c-quaternary);
+
+  --border: rgba(36, 36, 36, 0.18);
+  --hairline: rgba(36, 36, 36, 0.12);
+
+  --shadow-soft: 0 10px 30px rgba(36, 36, 36, 0.08);
+  --shadow-cta: 0 12px 28px rgba(36, 36, 36, 0.1);
+
+  --focus: rgba(36, 36, 36, 0.28);
+  --hover: rgba(36, 36, 36, 0.06);
+  --active: rgba(36, 36, 36, 0.1);
+  --font-zh:
+    "Yu Gothic UI", "Yu Gothic", "Microsoft JhengHei UI", "PingFang TC",
+    sans-serif;
+  --font-en: Helvetica, Arial, sans-serif;
+  --grid-columns: 4;
+  --grid-margin: 55px;
+  --grid-gutter: 41px;
+  --ink: var(--c-primary);
+  --muted: var(--c-secondary);
+  --hair: var(--hairline);
+}
+
+html,
+body {
+  height: auto;
+  overflow: auto;
+  background-color: var(--bg);
+  color: var(--text);
+  place-items: center;
+  user-select: none;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(36, 36, 36, 0.12);
+}
+
+/* =========================
+   Grid Tokens
+========================= */
+.grid-container {
+  width: calc(var(--stage-w) - (var(--grid-margin) * 2));
+  margin-left: var(--grid-margin);
+  margin-right: var(--grid-margin);
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+.col-1 {
+  grid-column: 1 / 2;
+}
+.col-2 {
+  grid-column: 2 / 3;
+}
+.col-3 {
+  grid-column: 3 / 4;
+}
+.col-4 {
+  grid-column: 4 / 5;
+}
+.col-1-3 {
+  grid-column: 1 / 3;
+}
+.col-2-4 {
+  grid-column: 2 / 4;
+}
+.col-3-5 {
+  grid-column: 3 / 5;
+}
+.col-1-5 {
+  grid-column: 1 / 5;
+}
+
+.center {
+  justify-self: center;
+  text-align: center;
+}
+.right {
+  justify-self: end;
+  text-align: right;
+}
+.left {
+  justify-self: start;
+  text-align: left;
+}
+
+.t-fullbleed {
+  width: 100%;
+}
+.t-fullbleed img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Title Row (淡水河 / TAMSUI RIVER) --- */
+.t-titleRow {
+  min-height: 222px;
+  display: flex;
+  align-items: center;
+}
+.t-titleRow .grid-container {
+  align-items: center;
+}
+.t-titleRow__left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.t-titleRow__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+/* 中文 */
+.t-titleRow__zh {
+  font-family: "Yu Gothic UI", sans-serif;
+  font-size: 55px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--c-primary);
+  margin: 0;
+}
+
+/* 英文 */
+.t-titleRow__en {
+  font-family: "Helvetica", sans-serif;
+  font-weight: 300;
+  font-size: 38px;
+  letter-spacing: 0.05em;
+  color: var(--c-primary);
+  margin: 0;
+}
+
+.t-titleRow__logo {
+  height: 62px;
+  width: auto;
+  display: block;
+}
+
+/* -----------------------------
+   Item Header Section
+----------------------------- */
+.t-itemHeader {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+}
+
+.t-itemHeader .grid-container {
+  align-items: center;
+}
+
+.t-itemHeader__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.t-itemHeader__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* 小標 */
+.t-itemHeader__label {
+  font-family: "Helvetica", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--c-secondary);
+  margin: 0;
+}
+
+.t-itemHeader__sub {
+  font-family:
+    "Yu Gothic UI", "Yu Gothic", "Microsoft JhengHei UI", "PingFang TC",
+    sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--c-secondary);
+  margin: 0;
+}
+
+/* 右側副文字 */
+.t-itemHeader__sub {
+  font-family: "Yu Gothic UI", sans-serif;
+  font-size: 20px;
+  color: var(--c-secondary);
+  margin: 0;
+}
+/* -----------------------------
+   Drink UI Section
+----------------------------- */
+.t-drinkScrollSection {
+  padding-top: 30px;
+  padding-bottom: 40px;
+
+  /* prevent overscroll chaining inside this section */
+  overscroll-behavior: contain;
+}
+
+/* 3-column layout aligned like your screenshot */
+.t-drinkUI {
+  display: grid;
+  grid-template-columns: 60px 220px 1fr;
+  align-items: center;
+  padding-left: 20px;
+}
+
+/* -------- LEFT -------- */
+.t-drinkUI__leftTitle {
+  margin-bottom: 18px;
+  color: rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.06em;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.t-sliderBlock {
+  position: relative;
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  gap: 14px;
+}
+
+.t-sliderScale {
+  position: relative;
+  height: 280px;
+  color: var(--c-tertiary);
+  font-size: 15px;
+  user-select: none;
+}
+.t-scaleLabel {
+  position: absolute;
+  left: 0;
+}
+.t-scaleLabel--top {
+  top: 0;
+}
+.t-scaleLabel--mid {
+  top: 50%;
+}
+.t-scaleLabel--bot {
+  bottom: 0;
+}
+.t-scaleLabel span {
+  font-size: 10px;
+}
+
+/* vertical slider */
+.t-verticalRange {
+  position: relative;
+  top: 7vh;
+  width: 280px;
+  height: 28px;
+  transform: rotate(-90deg);
+  transform-origin: left center;
+  z-index: 5;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+
+  /* critical for touch scroll issue */
+  touch-action: none;
+}
+
+.t-verticalRange::-webkit-slider-runnable-track {
+  height: 20px;
+  background: rgba(11, 11, 11, 0.1);
+  border-radius: 999px;
+}
+.t-verticalRange::-moz-range-track {
+  height: 20px;
+  background: rgba(11, 11, 11, 0.1);
+  border-radius: 999px;
+}
+
+.t-verticalRange::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+.t-verticalRange::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 2px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* -------- MIDDLE (Cup) -------- */
+.t-drinkUI__middle {
+  display: grid;
+  justify-items: center;
+}
+
+.t-cupStage {
+  position: relative;
+  width: 240px;
+  height: 360px;
+}
+
+/* Cup image */
+.t-cupSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Liquid reveal:
+   We keep the original liquid SVG (with highlight) intact,
+   reveal it by changing mask height from bottom.
+*/
+/* 容器照舊 */
+.t-liquidMask {
+  --fill: 0%;
+  position: absolute;
+  isolation: isolate;
+  left: 55px;
+  bottom: 26px;
+  width: 130px;
+  height: var(--fill);
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 0 0 40px 40px;
+}
+
+.t-liquidSvg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 底層模糊 */
+.t-liquidSvg--blur {
+  filter: blur(3px);
+  transform: translateZ(0);
+  z-index: 0;
+}
+
+/* 上層清晰，只顯示上面，往下漸淡 */
+.t-liquidSvg--sharp {
+  z-index: 1;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+/* 液面波浪：固定在遮罩頂端，隨著 fill 上升 */
+
+.t-mlReadout {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+}
+.t-mlReadout #mlValue {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 12px;
+}
+.t-mlUnit {
+  margin-left: 2px;
+}
+
+/* -------- RIGHT (Text) -------- */
+.t-rightHeader {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+.t-customTitle {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 12px;
+}
+.t-customSub {
+  color: rgba(0, 0, 0, 0.28);
+  font-size: 12px;
+}
+
+.t-meta {
+  position: relative;
+  padding-left: 34px; /* arrow space */
+  display: grid;
+  gap: 90px;
+}
+
+/* the small arrow near cup */
+.t-metaArrow {
+  position: absolute;
+  filter: drop-shadow(0px 0px 6.5px rgba(0, 0, 0, 0.25));
+  left: 8px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 10px solid rgba(0, 0, 0, 0.45);
+  transition: transform 220ms ease;
+}
+
+.t-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.t-rowMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 240px;
+}
+
+/* bracket look */
+.t-bracket {
+  position: relative;
+  padding: 10px 24px;
+  color: var(--c-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+}
+.t-bracket::before,
+.t-bracket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 100%;
+  border-top: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%);
+}
+.t-bracket::before {
+  left: 0;
+  border-left: 2px solid rgba(0, 0, 0, 0.3);
+}
+.t-bracket::after {
+  right: 0;
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.t-rowDesc {
+  color: rgba(0, 0, 0, 0.28);
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateX(10px);
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
+}
+
+.t-row.is-visible .t-rowDesc {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* -----------------------------
+   River Dots
+----------------------------- */
+.t-riverDots .grid-container {
+  align-items: center;
+}
+
+.t-riverDot {
+  width: 12px;
+  height: auto;
+  display: block;
+  margin-bottom: 100px;
+}
+
+/* -----------------------------
+   River Dots (Full Width Flex)
+----------------------------- */
+.t-riverDots__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- River Navigation Text (match Figma line breaks) --- */
+.t-riverNav__grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.t-riverNav__left {
+  justify-self: start;
+  color: var(--c-secondary);
+}
+
+.t-riverNav__center {
+  justify-self: center;
+  text-align: center;
+  color: var(--c-primary);
+}
+
+.t-riverNav__right {
+  justify-self: end;
+  text-align: right;
+  color: var(--c-secondary);
+}
+
+/* typography */
+.t-riverNav__text {
+  font-family: "Helvetica", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.35;
+  letter-spacing: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.t-riverNav__text br {
+  content: "";
+}
+
+.grid-overlay {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+body.debug .grid-overlay {
+  display: block;
+}
+
+/* 4-column grey debug grid */
+body.debug .grid-overlay {
+  --stage-w: 1080px;
+  --grid-columns: 4;
+  --grid-margin: 55px;
+  --grid-gutter: 41px;
+
+  --colw: calc(
+    (
+        var(--stage-w) - (var(--grid-margin) * 2) -
+          (var(--grid-gutter) * (var(--grid-columns) - 1))
+      ) /
+      var(--grid-columns)
+  );
+
+  background:
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent var(--grid-margin),
+      rgba(36, 36, 36, 0.06) var(--grid-margin),
+      rgba(36, 36, 36, 0.06) calc(var(--grid-margin) + var(--colw)),
+      transparent calc(var(--grid-margin) + var(--colw))
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(var(--grid-margin) + var(--colw)),
+      transparent calc(var(--grid-margin) + var(--colw) + var(--grid-gutter)),
+      rgba(36, 36, 36, 0.06)
+        calc(var(--grid-margin) + var(--colw) + var(--grid-gutter)),
+      rgba(36, 36, 36, 0.06)
+        calc(var(--grid-margin) + (var(--colw) * 2) + var(--grid-gutter)),
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 2) + var(--grid-gutter))
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 2) + var(--grid-gutter)),
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 2) + (var(--grid-gutter) * 2)),
+      rgba(36, 36, 36, 0.06)
+        calc(var(--grid-margin) + (var(--colw) * 2) + (var(--grid-gutter) * 2)),
+      rgba(36, 36, 36, 0.06)
+        calc(var(--grid-margin) + (var(--colw) * 3) + (var(--grid-gutter) * 2)),
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 3) + (var(--grid-gutter) * 2))
+    ),
+    linear-gradient(
+      to right,
+      transparent 0,
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 3) + (var(--grid-gutter) * 2)),
+      transparent
+        calc(var(--grid-margin) + (var(--colw) * 3) + (var(--grid-gutter) * 3)),
+      rgba(36, 36, 36, 0.06)
+        calc(var(--grid-margin) + (var(--colw) * 3) + (var(--grid-gutter) * 3)),
+      rgba(36, 36, 36, 0.06) calc(var(--stage-w) - var(--grid-margin)),
+      transparent calc(var(--stage-w) - var(--grid-margin)),
+      transparent 100%
+    );
+}
+
+/* =========================
+   Typography Tokens
+========================= */
+.font-zh {
+  font-family: var(--font-zh);
+}
+.font-en {
+  font-family: var(--font-en);
+}
+
+.h1 {
+  font-family: var(--font-en);
+  font-size: 86px;
+  letter-spacing: 0;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text);
+}
+.h2 {
+  font-family: var(--font-en);
+  font-size: 55px;
+  letter-spacing: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text);
+}
+.h3 {
+  font-family: var(--font-zh);
+  font-size: 42px;
+  letter-spacing: 25px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text);
+}
+.h3-card-zh {
+  font-family: var(--font-zh);
+  font-size: 38px;
+  letter-spacing: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.h3-card-en {
+  font-family: var(--font-en);
+  font-size: 38px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.st1 {
+  font-family: var(--font-en);
+  font-size: 30px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.st2 {
+  font-family: var(--font-zh);
+  font-size: 28px;
+  letter-spacing: 0px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.st2-nsew {
+  font-family: var(--font-en);
+  font-size: 28px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.st3 {
+  font-family: var(--font-en);
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.body1 {
+  font-family: var(--font-zh);
+  font-size: 20px;
+  letter-spacing: 0px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.body1-meta {
+  font-family: var(--font-zh);
+  font-size: 20px;
+  letter-spacing: 5px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.body1-pre {
+  font-family: var(--font-en);
+  font-size: 20px;
+  letter-spacing: 8px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.body2 {
+  font-family: var(--font-en);
+  font-size: 16px;
+  letter-spacing: 5px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-subtle);
+}
+
+/* =========================
+   TAMSUI layout
+========================= */
+.stage {
+  background: var(--bg);
+  width: 1080px;
+  position: relative;
+  background: transparent;
+}
+
+.t-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.t-header .grid-container {
+  align-items: center;
+}
+.t-header__left {
+  justify-self: start;
+}
+.t-header__right {
+  justify-self: end;
+}
+.t-header__center {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.t-header__logo {
+  height: 56px;
+  width: auto;
+  opacity: 0.8;
+  display: block;
+}
+.t-header__icon {
+  font-family: var(--font-en);
+  font-size: 22px;
+  letter-spacing: 8px;
+  color: var(--text-muted);
+}
+
+.t-content {
+  width: 100%;
+}
+.t-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: none;
+}
+
+/* --- CTA fixed container --- */
+.t-cta {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 1080px;
+  background: transparent;
+  overflow: visible;
+  z-index: 50;
+}
+
+.t-cta__glow {
+  position: absolute;
+  display: block;
+  left: -60px;
+  right: -60px;
+
+  /* 往下一點，不要飄太高 */
+  top: -32px;
+
+  /* 變矮 */
+  height: 90px;
+
+  opacity: 0.75;
+  border-radius: 40px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(246, 211, 140, 1) 0%,
+    rgba(251, 200, 137, 1) 21%,
+    rgba(233, 114, 74, 1) 69%,
+    rgba(252, 199, 135, 1) 90%
+  );
+
+  filter: blur(65px);
+
+  /* 收斂外擴感 */
+  transform: scaleX(1.08);
+  transform-origin: center;
+  pointer-events: none;
+}
+.glow {
+  background: transparent;
+  position: relative;
+}
+
+/* --- CTA card (white block) --- */
+.t-cta__card {
+  width: 100%;
+  min-height: 280px;
+
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 36px;
+
+  /* 第一層玻璃底色 */
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 250, 250, 0.35) 0%,
+    rgba(250, 250, 250, 0.85) 50%,
+    rgba(250, 250, 250, 1) 100%
+  );
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow:
+    0 -12px 60px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.t-cta__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+
+  pointer-events: none;
+}
+
+.t-cta__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    ellipse at top center,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent 70%
+  );
+
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.t-cta__titleWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Avoid default margins inside card */
+.t-cta__card * {
+  margin: 0;
+}
+
+.t-cta__dots {
+  width: calc(100% - 110px);
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.t-cta__dot {
+  width: 12px;
+  height: auto;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.t-cta__titleEn {
+  font-family: "Helvetica", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 86px;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--c-primary);
+  text-align: center;
+
+  animation: enGlow 1s ease-in infinite alternate;
+  will-change: text-shadow, filter, transform;
+}
+@keyframes enGlow {
+  0% {
+    text-shadow: none;
+  }
+
+  100% {
+    text-shadow:
+      0 0 6px rgba(255, 255, 255, 0.5),
+      0 0 20px rgba(90, 90, 90, 0.25),
+      0 0 60px rgba(0, 0, 0, 0.16);
+  }
+}
+.t-cta__titleZh {
+  font-family:
+    "Hina Mincho", "Yu Gothic UI", "Yu Gothic", "Microsoft JhengHei UI",
+    "PingFang TC", serif;
+  font-weight: 400;
+  font-size: 42px;
+  letter-spacing: 0.25em;
+  line-height: 1.1;
+  color: var(--c-primary);
+
+  margin-top: 14px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.t-cta__titleZh img {
+  display: block;
+  animation: zhGlow 1s ease-in infinite alternate;
+  will-change: filter, transform;
+}
+@keyframes zhGlow {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 0 rgba(0, 0, 0, 0))
+      drop-shadow(0 0 12px rgba(0, 0, 0, 0));
+  }
+
+  100% {
+    filter: brightness(1.12) drop-shadow(0 0 18px rgba(255, 255, 255, 0.35))
+      drop-shadow(0 0 90px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.t-cta__titleZh:focus-visible {
+  outline: 2px solid rgba(36, 36, 36, 0.28);
+  outline-offset: 6px;
+}
+
+/* ===== Page scroll (no inner scroll) ===== */
+
+/* 固定 Header */
+.t-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1080px;
+  z-index: 60;
+  background: rgba(250, 250, 250, 1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* 內容改成正常流動 */
+.t-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 140px;
+  padding-bottom: 320px;
+}
+
+/* Banner fullbleed 仍然維持撐滿 1080 */
+.t-fullbleed {
+  width: 100%;
+}
