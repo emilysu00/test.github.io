@@ -1042,3 +1042,59 @@ body.debug .grid-overlay {
 .t-fullbleed {
   width: 100%;
 }
+
+/* ===== Banner Slider ===== */
+
+.t-bannerSlider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.t-bannerSlider__track {
+  display: flex;
+  width: 100%; /* 4 張圖 */
+  animation: bannerSlide 16s infinite;
+}
+
+.t-bannerSlider__track img {
+  width: 100%;
+  height: auto;
+  flex: 0 0 100%;
+  object-fit: cover;
+}
+
+/* 自動循環動畫 */
+@keyframes bannerSlide {
+  0% {
+    transform: translateX(0%);
+  }
+  20% {
+    transform: translateX(0%);
+  }
+
+  25% {
+    transform: translateX(-100%);
+  }
+  45% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    transform: translateX(-200%);
+  }
+  70% {
+    transform: translateX(-200%);
+  }
+
+  75% {
+    transform: translateX(-300%);
+  }
+  95% {
+    transform: translateX(-300%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
