@@ -808,6 +808,9 @@ body.debug .grid-overlay {
 }
 
 /* --- CTA fixed container --- */
+.t-cta a {
+  text-decoration: none;
+}
 .t-cta {
   position: fixed;
   left: 50%;
