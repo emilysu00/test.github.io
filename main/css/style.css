@@ -1101,3 +1101,20 @@ body.debug .grid-overlay {
     transform: translateX(0%);
   }
 }
+
+/* ===== Hide scrollbar (safe) ===== */
+
+/* Chrome / Safari / Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE (基本可忽略但完整寫) */
+body {
+  -ms-overflow-style: none;
+}
