@@ -1134,6 +1134,7 @@ body.debug .grid-overlay {
   display: block;
   animation: zhGlow 1s ease-in infinite alternate;
   will-change: filter, transform;
+  height: 44px;
 }
 @keyframes zhGlow {
   0% {

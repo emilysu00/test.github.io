@@ -5,22 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KEELUNG</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/pre-popup.css" />
   </head>
 
-  <body class="">
+  <body class="" data-pre-popup-root>
     <div class="stage keelung show-grid">
       <div class="grid-overlay"></div>
       <header class="t-header">
         <div class="grid-container">
-          <div class="st3 font-en col-1 left">MAP</div>
+          <button
+            class="pre-popup-trigger font-en col-1 left"
+            type="button"
+            data-popup-target="map"
+            aria-expanded="false"
+            aria-controls="pre-popup-map"
+          >
+            MAP
+          </button>
 
           <div class="col-2-4 center">
-            <img src="img/logo.svg" alt="KEELUNG Logo" class="t-header__logo" />
+            <img src="img/logo.svg" alt="TAMSUI Logo" class="t-header__logo" />
           </div>
 
-          <div class="st3 font-en col-4 right">INS</div>
+          <button
+            class="pre-popup-trigger font-en col-4 right"
+            type="button"
+            data-popup-target="ins"
+            aria-expanded="false"
+            aria-controls="pre-popup-ins"
+          >
+            INS
+          </button>
         </div>
       </header>
+
+      <div class="pre-popup-layer" aria-live="polite">
+        <div
+          class="pre-popup pre-popup--map"
+          id="pre-popup-map"
+          data-popup="map"
+          aria-hidden="true"
+        >
+          <div class="pre-popup__panel pre-popup__panel--map">
+            <img
+              class="pre-popup__image"
+              src="img/taiwan/01.svg"
+              alt="Taiwan map"
+            />
+          </div>
+        </div>
+
+        <div
+          class="pre-popup pre-popup--ins"
+          id="pre-popup-ins"
+          data-popup="ins"
+          data-ig-url="https://www.instagram.com/flowtea.drink?igsh=aXRjenQ2N203dGxy&utm_source=qr"
+          aria-hidden="true"
+        >
+          <div class="pre-popup__panel pre-popup__panel--ins">
+            <p class="pre-popup__label">INSTAGRAM</p>
+            <a
+              class="pre-popup__link"
+              data-ig-link
+              href="https://www.instagram.com/flowtea.drink?igsh=aXRjenQ2N203dGxy&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Instagram profile"
+            >
+              <img
+                class="pre-popup__qr"
+                data-ig-qr
+                src=""
+                alt="Instagram QR code"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
 
       <main class="t-content">
         <section class="t-fullbleed">
@@ -214,5 +275,6 @@
     <script src="js/debug.js"></script>
     <script src="js/drink-config.js"></script>
     <script src="js/interaction.js"></script>
+    <script src="js/pre-popup.js"></script>
   </body>
 </html>
