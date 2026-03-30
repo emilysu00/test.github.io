@@ -1,26 +1,48 @@
 (function () {
-  const range = document.getElementById("drinkRange");
-  const mlValue = document.getElementById("mlValue");
-  const liquidMask = document.getElementById("liquidMask");
-  const liquidSvg = document.getElementById("liquidSvg");
+  const CONFIGS = window.DRINK_UI_CONFIG || {};
+  const controls = document.querySelectorAll(".js-drink-control");
 
-  const rowTop = document.querySelector('.t-row[data-row="top"]');
-  const rowBottom = document.querySelector('.t-row[data-row="bottom"]');
-  const arrow = document.getElementById("metaArrow");
-
-  if (!range || !liquidMask || !liquidSvg) return;
-
-  // ✅ 查一次就好
-  const liquidSurface = liquidMask.querySelector(".t-liquidSurface");
-
-  // ----- helpers -----
-  function clamp(n, a, b) {
-    return Math.max(a, Math.min(b, n));
+  function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
   }
 
-  function setArrowToRow(rowEl) {
+  function toNumber(value, fallback) {
+    const num = Number(value);
+    return Number.isFinite(num) ? num : fallback;
+  }
+
+  function resolveSettings(control, root, range) {
+    const variant = control.dataset.variant || root?.dataset.variant || "1200";
+    const config = CONFIGS[variant] || {};
+    const max = toNumber(config.max, toNumber(control.dataset.max, toNumber(range.max, 100)));
+    const initial = clamp(
+      toNumber(config.initial, toNumber(control.dataset.value, toNumber(range.value, 0))),
+      0,
+      max,
+    );
+    const scale = Array.isArray(config.scale) && config.scale.length === 3
+      ? config.scale
+      : [max, Math.round(max / 2), 0];
+    const thresholds = {
+      bottom: clamp(
+        toNumber(config.thresholds?.bottom, max * 0.18),
+        0,
+        max,
+      ),
+      top: clamp(
+        toNumber(config.thresholds?.top, max * 0.55),
+        0,
+        max,
+      ),
+    };
+    const unit = control.dataset.unit || "ml";
+
+    return { variant, max, initial, scale, thresholds, unit };
+  }
+
+  function setArrowToRow(rowEl, arrow) {
     const meta = rowEl.closest(".t-meta");
-    if (!meta) return;
+    if (!meta || !arrow) return;
 
     const metaRect = meta.getBoundingClientRect();
     const main = rowEl.querySelector(".t-rowMain");
@@ -28,98 +50,125 @@
 
     const mainRect = main.getBoundingClientRect();
     const centerY = (mainRect.top + mainRect.bottom) / 2 - metaRect.top;
-    if (arrow) arrow.style.transform = `translateY(${centerY - 7}px)`;
+    arrow.style.transform = `translateY(${centerY - 7}px)`;
   }
 
-  // ✅ 修正：真正更新 fill + surface
-  function updateFill(ml) {
-    const t = clamp(ml / 1200, 0, 1);
-    liquidMask.style.setProperty("--fill", `${(t * 100).toFixed(2)}%`);
+  controls.forEach((control) => {
+    const root = control.closest(".t-drinkUI") || control.parentElement;
+    const range = control.querySelector(".js-drink-range");
+    const liquidMask = root?.querySelector(".js-liquid-mask");
+    const mlValue = root?.querySelector(".js-ml-value");
+    const mlUnit = root?.querySelector(".js-ml-unit");
+    const rowTop = root?.querySelector('.t-row[data-row="top"]');
+    const rowBottom = root?.querySelector('.t-row[data-row="bottom"]');
+    const arrow = root?.querySelector(".js-meta-arrow");
+    const scaleTop = control.querySelector(".js-scale-top");
+    const scaleMid = control.querySelector(".js-scale-mid");
+    const scaleBottom = control.querySelector(".js-scale-bottom");
+    const scaleUnit = control.querySelector(".js-scale-unit");
+    const liquidSurface = liquidMask?.querySelector(".t-liquidSurface");
 
-    // 空杯就不顯示波浪
-    if (liquidSurface) {
-      liquidSurface.style.opacity = t <= 0.01 ? "0" : "0.55";
+    if (!root || !range || !liquidMask) return;
+
+    const settings = resolveSettings(control, root, range);
+    root.dataset.variant = settings.variant;
+    control.dataset.variant = settings.variant;
+    control.dataset.max = String(settings.max);
+    control.dataset.value = String(settings.initial);
+
+    range.max = String(settings.max);
+    range.value = String(settings.initial);
+
+    if (scaleTop) scaleTop.textContent = String(settings.scale[0]);
+    if (scaleMid) scaleMid.textContent = String(settings.scale[1]);
+    if (scaleBottom) scaleBottom.textContent = String(settings.scale[2]);
+    if (scaleUnit) scaleUnit.textContent = settings.unit;
+    if (mlUnit) mlUnit.textContent = ` ${settings.unit}`;
+
+    function updateFill(value) {
+      const fillRatio = clamp(value / settings.max, 0, 1);
+      liquidMask.style.setProperty("--fill", `${(fillRatio * 100).toFixed(2)}%`);
+
+      if (liquidSurface) {
+        liquidSurface.style.opacity = fillRatio <= 0.01 ? "0" : "0.55";
+      }
     }
-  }
 
-  function updateText(ml) {
-    const t = ml / 1200;
-    const showBottom = t >= 0.18;
-    const showTop = t >= 0.55;
+    function updateText(value) {
+      const showBottom = value >= settings.thresholds.bottom;
+      const showTop = value >= settings.thresholds.top;
 
-    rowBottom?.classList.toggle("is-visible", showBottom);
-    rowTop?.classList.toggle("is-visible", showTop);
+      rowBottom?.classList.toggle("is-visible", showBottom);
+      rowTop?.classList.toggle("is-visible", showTop);
 
-    const active = t >= 0.55 ? rowTop : rowBottom;
-    if (active) setArrowToRow(active);
-  }
+      const activeRow = showTop ? rowTop : rowBottom;
+      if (activeRow) setArrowToRow(activeRow, arrow);
+    }
 
-  function updateUI() {
-    const ml = Number(range.value);
-    if (mlValue) mlValue.textContent = ml;
+    function updateUI() {
+      const value = clamp(toNumber(range.value, settings.initial), 0, settings.max);
+      range.value = String(value);
+      control.dataset.value = String(value);
 
-    updateFill(ml);
-    updateText(ml);
-  }
+      if (mlValue) mlValue.textContent = String(value);
 
-  // ----- prevent scroll fighting (only while interacting) -----
-  range.addEventListener("wheel", (e) => e.preventDefault(), {
-    passive: false,
-  });
+      updateFill(value);
+      updateText(value);
+    }
 
-  // ----- custom vertical drag mapping -----
-  let dragging = false;
+    range.addEventListener(
+      "wheel",
+      (event) => {
+        event.preventDefault();
+      },
+      { passive: false },
+    );
 
-  function setValueFromPointer(clientY) {
-    const rect = range.getBoundingClientRect();
-    const p = clamp((clientY - rect.top) / rect.height, 0, 1);
+    let dragging = false;
 
-    // 上方 max、下方 min
-    const tt = 1 - p;
-    const min = Number(range.min || 0);
-    const max = Number(range.max || 1200);
-    const v = Math.round(min + tt * (max - min));
+    function setValueFromPointer(clientY) {
+      const rect = range.getBoundingClientRect();
+      const progress = clamp((clientY - rect.top) / rect.height, 0, 1);
+      const mapped = 1 - progress;
+      const min = toNumber(range.min, 0);
+      const max = toNumber(range.max, settings.max);
+      const value = Math.round(min + mapped * (max - min));
 
-    range.value = String(v);
-    updateUI();
-  }
+      range.value = String(value);
+      updateUI();
+    }
 
-  range.addEventListener(
-    "pointerdown",
-    (e) => {
-      dragging = true;
-      range.setPointerCapture?.(e.pointerId);
+    range.addEventListener(
+      "pointerdown",
+      (event) => {
+        dragging = true;
+        range.setPointerCapture?.(event.pointerId);
+        setValueFromPointer(event.clientY);
+        event.preventDefault();
+      },
+      { passive: false },
+    );
 
-      setValueFromPointer(e.clientY);
-      e.preventDefault();
-    },
-    { passive: false },
-  );
+    range.addEventListener(
+      "pointermove",
+      (event) => {
+        if (!dragging) return;
+        setValueFromPointer(event.clientY);
+        event.preventDefault();
+      },
+      { passive: false },
+    );
 
-  range.addEventListener(
-    "pointermove",
-    (e) => {
-      if (!dragging) return;
-      setValueFromPointer(e.clientY);
-      e.preventDefault();
-    },
-    { passive: false },
-  );
+    function endDrag() {
+      dragging = false;
+    }
 
-  function endDrag() {
-    dragging = false;
-  }
-
-  range.addEventListener("pointerup", endDrag, { passive: true });
-  range.addEventListener("pointercancel", endDrag, { passive: true });
-  range.addEventListener("lostpointercapture", endDrag, { passive: true });
-
-  // init
-  window.addEventListener("load", () => {
-    updateUI();
+    range.addEventListener("pointerup", endDrag, { passive: true });
+    range.addEventListener("pointercancel", endDrag, { passive: true });
+    range.addEventListener("lostpointercapture", endDrag, { passive: true });
+    range.addEventListener("input", updateUI);
     window.addEventListener("resize", updateUI);
-  });
 
-  // keyboard / click jump still works
-  range.addEventListener("input", updateUI);
+    updateUI();
+  });
 })();

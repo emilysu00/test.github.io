@@ -18,21 +18,13 @@
             <img src="img/logo.svg" alt="TAMSUI Logo" class="t-header__logo" />
           </div>
 
-          <div class="st3 font-en col-4 right">OWS</div>
+          <div class="st3 font-en col-4 right">INS</div>
         </div>
       </header>
 
       <main class="t-content">
-        <!-- <section class="t-fullbleed">
-          <img class="t-banner" src="img/tamsui-banner01.png" alt="" />
-        </section> -->
-        <section class="t-fullbleed t-bannerSlider">
-          <div class="t-bannerSlider__track">
-            <img src="img/tamsui-banner01.png" alt="" />
-            <img src="img/tamsui-banner02.png" alt="" />
-            <img src="img/tamsui-banner03.png" alt="" />
-            <img src="img/tamsui-banner04.png" alt="" />
-          </div>
+        <section class="t-fullbleed">
+          <img class="t-banner" src="img/banner.png" alt="" />
         </section>
 
         <section class="t-section t-titleRow">
@@ -68,26 +60,35 @@
         <section class="t-section t-drinkScrollSection">
           <div class="grid-container">
             <div class="col-1-5">
-              <div class="t-drinkUI">
+              <div class="t-drinkUI" data-variant="1200">
                 <!-- LEFT -->
-                <div class="t-drinkUI__left">
+                <div
+                  class="t-drinkUI__left js-drink-control"
+                  data-variant="1200"
+                  data-max="1200"
+                  data-value="445"
+                  data-unit="ml"
+                >
                   <div class="t-sliderBlock">
                     <input
-                      id="drinkRange"
-                      class="t-verticalRange"
+                      class="t-verticalRange js-drink-range"
                       type="range"
                       min="0"
-                      max="1200"
-                      value="445"
                       step="1"
                       aria-label="Drink amount"
                     />
 
                     <div class="t-sliderScale">
-                      <div class="t-scaleLabel t-scaleLabel--top">1200</div>
-                      <div class="t-scaleLabel t-scaleLabel--mid">600</div>
+                      <div
+                        class="t-scaleLabel t-scaleLabel--top js-scale-top"
+                      ></div>
+                      <div
+                        class="t-scaleLabel t-scaleLabel--mid js-scale-mid"
+                      ></div>
                       <div class="t-scaleLabel t-scaleLabel--bot">
-                        0<br /><span>ml</span>
+                        <span class="js-scale-bottom"></span><br /><span
+                          class="js-scale-unit"
+                        ></span>
                       </div>
                     </div>
                   </div>
@@ -95,11 +96,11 @@
 
                 <!-- MIDDLE -->
                 <div class="t-drinkUI__middle" aria-hidden="true">
-                  <div class="t-cupStage">
+                  <div class="t-cupStage1200">
                     <!-- cup -->
                     <img class="t-cupSvg" src="img/cup1200.svg" alt="" />
                     <!-- liquid reveal mask -->
-                    <div class="t-liquidMask" id="liquidMask">
+                    <div class="t-liquidMask js-liquid-mask">
                       <!-- 底層：模糊 -->
                       <img
                         class="t-liquidSvg t-liquidSvg--blur"
@@ -109,8 +110,7 @@
 
                       <!-- 上層：清晰 -->
                       <img
-                        class="t-liquidSvg t-liquidSvg--sharp"
-                        id="liquidSvg"
+                        class="t-liquidSvg t-liquidSvg--sharp js-liquid-svg"
                         src="img/drinks/tamsui.svg"
                         alt=""
                       />
@@ -118,8 +118,8 @@
                   </div>
 
                   <div class="t-mlReadout">
-                    <span id="mlValue">445</span
-                    ><span class="t-mlUnit"> ml</span>
+                    <span class="js-ml-value">445</span
+                    ><span class="t-mlUnit js-ml-unit"> ml</span>
                   </div>
                 </div>
 
@@ -127,8 +127,7 @@
                 <div class="t-drinkUI__right">
                   <div class="t-meta">
                     <div
-                      class="t-metaArrow"
-                      id="metaArrow"
+                      class="t-metaArrow js-meta-arrow"
                       aria-hidden="true"
                     ></div>
 
@@ -136,7 +135,7 @@
                       <div class="t-rowMain">
                         <span class="t-bracket">碎冰：潮汐交替</span>
                       </div>
-                      <div class="t-rowDesc" id="descTop">
+                      <div class="t-rowDesc">
                         出海口河水倒退如融化冰，潮汐帶走河運記憶。
                       </div>
                     </div>
@@ -149,7 +148,7 @@
                           日東紅茶</span
                         >
                       </div>
-                      <div class="t-rowDesc" id="descBottom">
+                      <div class="t-rowDesc">
                         新店溪、大漢溪與基隆河水帶著茶香，匯集成淡水河。
                       </div>
                     </div>
@@ -188,16 +187,16 @@
         <section class="t-section">
           <div class="grid-container">
             <div class="col-1-5">
-              <img class="t-img" src="img/tamsui-gif.png" alt="" />
+              <img class="t-img" src="img/map/02.png" alt="" />
             </div>
           </div>
         </section>
       </main>
 
       <footer class="t-cta">
-        <a href="./tamsui-motion.html">
+        <a href="./motion/02.html" class="t-cta__link">
           <div class="glow">
-            <span class="t-cta__glow" aria-hidden="true"></span>
+            <span class="t-cta__glow" id="tamsui" aria-hidden="true"></span>
           </div>
 
           <div class="t-cta__card">
@@ -217,6 +216,7 @@
       </footer>
     </div>
     <script src="js/debug.js"></script>
+    <script src="js/drink-config.js"></script>
     <script src="js/interaction.js"></script>
   </body>
 </html>

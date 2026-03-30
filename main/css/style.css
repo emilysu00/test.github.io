@@ -227,10 +227,52 @@ a {
 
 /* 3-column layout aligned like your screenshot */
 .t-drinkUI {
+  --slider-scale-h: 280px;
+  --slider-range-w: 280px;
+  --slider-offset-y: 7vh;
+  --slider-track-h: 20px;
+  --slider-thumb-size: 20px;
+  --slider-gap: 14px;
   display: grid;
   grid-template-columns: 60px 220px 1fr;
   align-items: center;
   padding-left: 20px;
+}
+
+.t-drinkUI[data-variant="1200"] {
+  --slider-scale-h: 280px;
+  --slider-range-w: 280px;
+  --slider-offset-y: 7vh;
+  --slider-track-h: 20px;
+  --slider-thumb-size: 20px;
+  --slider-gap: 14px;
+}
+
+.t-drinkUI[data-variant="1000"] {
+  --slider-scale-h: 250px;
+  --slider-range-w: 250px;
+  --slider-offset-y: 6vh;
+  --slider-track-h: 18px;
+  --slider-thumb-size: 18px;
+  --slider-gap: 12px;
+}
+
+.t-drinkUI[data-variant="750"] {
+  --slider-scale-h: 220px;
+  --slider-range-w: 220px;
+  --slider-offset-y: 5vh;
+  --slider-track-h: 16px;
+  --slider-thumb-size: 16px;
+  --slider-gap: 10px;
+}
+
+.t-drinkUI[data-variant="500"] {
+  --slider-scale-h: 180px;
+  --slider-range-w: 180px;
+  --slider-offset-y: 4vh;
+  --slider-track-h: 14px;
+  --slider-thumb-size: 14px;
+  --slider-gap: 8px;
 }
 
 /* -------- LEFT -------- */
@@ -247,12 +289,12 @@ a {
   display: grid;
   grid-template-columns: 10px 1fr;
   align-items: center;
-  gap: 14px;
+  gap: var(--slider-gap);
 }
 
 .t-sliderScale {
   position: relative;
-  height: 280px;
+  height: var(--slider-scale-h);
   color: var(--c-tertiary);
   font-size: 15px;
   user-select: none;
@@ -277,9 +319,9 @@ a {
 /* vertical slider */
 .t-verticalRange {
   position: relative;
-  top: 7vh;
-  width: 280px;
-  height: 28px;
+  top: var(--slider-offset-y);
+  width: var(--slider-range-w);
+  height: calc(var(--slider-thumb-size) + 8px);
   transform: rotate(-90deg);
   transform-origin: left center;
   z-index: 5;
@@ -293,28 +335,29 @@ a {
 }
 
 .t-verticalRange::-webkit-slider-runnable-track {
-  height: 20px;
+  height: var(--slider-track-h);
   background: rgba(11, 11, 11, 0.1);
   border-radius: 999px;
 }
 .t-verticalRange::-moz-range-track {
-  height: 20px;
+  height: var(--slider-track-h);
   background: rgba(11, 11, 11, 0.1);
   border-radius: 999px;
 }
 
 .t-verticalRange::-webkit-slider-thumb {
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
   border-radius: 999px;
   background: #fff;
   border: 2px solid rgba(0, 0, 0, 0.16);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  margin-top: calc((var(--slider-track-h) - var(--slider-thumb-size)) / 2);
 }
 .t-verticalRange::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
   border-radius: 999px;
   background: #fff;
   border: 2px solid rgba(0, 0, 0, 0.16);
@@ -327,12 +370,26 @@ a {
   justify-items: center;
 }
 
-.t-cupStage {
+.t-cupStage1200 {
   position: relative;
   width: 240px;
   height: 360px;
 }
-
+.t-cupStage1000 {
+  position: relative;
+  width: 240px;
+  height: 250px;
+}
+.t-cupStage750 {
+  position: relative;
+  width: 240px;
+  height: 320px;
+}
+.t-cupStage500 {
+  position: relative;
+  width: 240px;
+  height: 260px;
+}
 /* Cup image */
 .t-cupSvg {
   position: absolute;
@@ -400,7 +457,7 @@ a {
   color: rgba(0, 0, 0, 0.35);
   font-size: 12px;
 }
-.t-mlReadout #mlValue {
+.t-mlReadout .js-ml-value {
   color: rgba(0, 0, 0, 0.55);
   font-size: 12px;
 }
@@ -837,6 +894,15 @@ body.debug .grid-overlay {
   opacity: 0.75;
   border-radius: 40px;
 
+  filter: blur(65px);
+
+  /* 收斂外擴感 */
+  transform: scaleX(1.08);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+#tamsui {
   background: linear-gradient(
     90deg,
     rgba(246, 211, 140, 1) 0%,
@@ -844,13 +910,78 @@ body.debug .grid-overlay {
     rgba(233, 114, 74, 1) 69%,
     rgba(252, 199, 135, 1) 90%
   );
-
-  filter: blur(65px);
-
-  /* 收斂外擴感 */
-  transform: scaleX(1.08);
-  transform-origin: center;
-  pointer-events: none;
+}
+#dahan {
+  background: linear-gradient(
+    90deg,
+    #ffee94 0%,
+    #ffdf88 30%,
+    #fdc0de 73%,
+    #ffce8b 100%
+  );
+}
+#jhuosheui {
+  background: linear-gradient(
+    90deg,
+    #cdcd8b 0%,
+    #c7d16a 21%,
+    #d9c582 74%,
+    #cbd4c0 100%
+  );
+}
+#keelung {
+  background: linear-gradient(
+    90deg,
+    #fff6ba 0%,
+    #f6bb52 29%,
+    #fff7c3 69%,
+    #ffef89 100%
+  );
+}
+#gaoping {
+  background: linear-gradient(
+    90deg,
+    #f6d98e 0%,
+    #ffe981 36%,
+    #ffc577 72%,
+    #ffef86 100%
+  );
+}
+#siougulan {
+  background: linear-gradient(
+    90deg,
+    #ecf7da 0%,
+    #d5e6d4 38%,
+    #c7dbd0 76%,
+    #cccccc 100%
+  );
+}
+#baibao {
+  background: linear-gradient(
+    90deg,
+    #ddf1e4 10%,
+    #f5f2cf 48%,
+    #fef8ba 76%,
+    #edecd9 100%
+  );
+}
+#zengwen {
+  background: linear-gradient(
+    90deg,
+    #cfd8a4 0%,
+    #bee391 34%,
+    #cab58f 77%,
+    #e0e0ad 100%
+  );
+}
+#wu {
+  background: linear-gradient(
+    90deg,
+    #d9ec59 17%,
+    #fff466 47%,
+    #ffc259 81%,
+    #fae570 100%
+  );
 }
 .glow {
   background: transparent;
@@ -888,7 +1019,10 @@ body.debug .grid-overlay {
     0 -12px 60px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
-
+#pre-cta,
+#pre_card {
+  min-height: 414px;
+}
 .t-cta__card::before {
   content: "";
   position: absolute;
@@ -1017,6 +1151,18 @@ body.debug .grid-overlay {
   outline: 2px solid rgba(36, 36, 36, 0.28);
   outline-offset: 6px;
 }
+.t-cta__copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 180px 55px 0px 55px;
+  box-sizing: border-box;
+}
+
+.t-cta__copyright p {
+  margin: 0;
+}
 
 /* ===== Page scroll (no inner scroll) ===== */
 
@@ -1040,68 +1186,13 @@ body.debug .grid-overlay {
   padding-top: 140px;
   padding-bottom: 320px;
 }
-
+#pre-banner {
+  padding-bottom: 0px;
+}
 /* Banner fullbleed 仍然維持撐滿 1080 */
 .t-fullbleed {
   width: 100%;
 }
-
-/* ===== Banner Slider ===== */
-
-.t-bannerSlider {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.t-bannerSlider__track {
-  display: flex;
-  width: 100%; /* 4 張圖 */
-  animation: bannerSlide 16s infinite;
-}
-
-.t-bannerSlider__track img {
-  width: 100%;
-  height: auto;
-  flex: 0 0 100%;
-  object-fit: cover;
-}
-
-/* 自動循環動畫 */
-@keyframes bannerSlide {
-  0% {
-    transform: translateX(0%);
-  }
-  20% {
-    transform: translateX(0%);
-  }
-
-  25% {
-    transform: translateX(-100%);
-  }
-  45% {
-    transform: translateX(-100%);
-  }
-
-  50% {
-    transform: translateX(-200%);
-  }
-  70% {
-    transform: translateX(-200%);
-  }
-
-  75% {
-    transform: translateX(-300%);
-  }
-  95% {
-    transform: translateX(-300%);
-  }
-
-  100% {
-    transform: translateX(0%);
-  }
-}
-
 /* ===== Hide scrollbar (safe) ===== */
 
 /* Chrome / Safari / Edge */

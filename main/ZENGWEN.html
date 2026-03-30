@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ZENGWEN</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body class="">
+    <div class="stage zengwen show-grid">
+      <div class="grid-overlay"></div>
+      <header class="t-header">
+        <div class="grid-container">
+          <div class="st3 font-en col-1 left">MAP</div>
+
+          <div class="col-2-4 center">
+            <img src="img/logo.svg" alt="ZENGWEN Logo" class="t-header__logo" />
+          </div>
+
+          <div class="st3 font-en col-4 right">INS</div>
+        </div>
+      </header>
+
+      <main class="t-content">
+        <section class="t-fullbleed">
+          <img class="t-banner" src="img/banner.png" alt="" />
+        </section>
+
+        <section class="t-section t-titleRow">
+          <div class="grid-container">
+            <div class="t-titleRow__left col-1-3">
+              <img
+                class="t-titleRow__logo"
+                src="./img/logotype/ZENGWEN.svg"
+                alt="ZENGWEN"
+              />
+            </div>
+
+            <div class="t-titleRow__right col-3-5">
+              <p class="t-titleRow__en">ZENGWEN RIVER</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="t-section t-itemHeader">
+          <div class="grid-container">
+            <div class="t-itemHeader__left col-1-3">
+              <p class="t-itemHeader__label">( I T E M )</p>
+              <p class="t-itemHeader__label">DESCRIPTION</p>
+            </div>
+
+            <div class="t-itemHeader__right col-3-5">
+              <p class="t-itemHeader__label">Customization</p>
+              <p class="t-itemHeader__sub">半糖 / 少冰</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="t-section t-drinkScrollSection">
+          <div class="grid-container">
+            <div class="col-1-5">
+              <div class="t-drinkUI" data-variant="500">
+                <!-- LEFT -->
+                <div
+                  class="t-drinkUI__left js-drink-control"
+                  data-variant="500"
+                  data-max="500"
+                  data-value="250"
+                  data-unit="ml"
+                >
+                  <div class="t-sliderBlock">
+                    <input
+                      class="t-verticalRange js-drink-range"
+                      type="range"
+                      min="0"
+                      step="1"
+                      aria-label="Drink amount"
+                    />
+
+                    <div class="t-sliderScale">
+                      <div
+                        class="t-scaleLabel t-scaleLabel--top js-scale-top"
+                      ></div>
+                      <div
+                        class="t-scaleLabel t-scaleLabel--mid js-scale-mid"
+                      ></div>
+                      <div class="t-scaleLabel t-scaleLabel--bot">
+                        <span class="js-scale-bottom"></span><br /><span
+                          class="js-scale-unit"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- MIDDLE -->
+                <div class="t-drinkUI__middle" aria-hidden="true">
+                  <div class="t-cupStage500">
+                    <!-- cup -->
+                    <img class="t-cupSvg" src="img/cup500.svg" alt="" />
+                    <!-- liquid reveal mask -->
+                    <div class="t-liquidMask js-liquid-mask">
+                      <!-- 底層：模糊 -->
+                      <img
+                        class="t-liquidSvg t-liquidSvg--blur"
+                        src="img/drinks/zengwen.svg"
+                        alt=""
+                      />
+
+                      <!-- 上層：清晰 -->
+                      <img
+                        class="t-liquidSvg t-liquidSvg--sharp js-liquid-svg"
+                        src="img/drinks/zengwen.svg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+
+                  <div class="t-mlReadout">
+                    <span class="js-ml-value">250</span
+                    ><span class="t-mlUnit js-ml-unit"> ml</span>
+                  </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="t-drinkUI__right">
+                  <div class="t-meta">
+                    <div
+                      class="t-metaArrow js-meta-arrow"
+                      aria-hidden="true"
+                    ></div>
+
+                    <div class="t-row" data-row="top">
+                      <div class="t-rowMain">
+                        <span class="t-bracket">綠豆冰沙：河川改道</span>
+                      </div>
+                      <div class="t-rowDesc">
+                        改道與截彎使水路被分割，如冰沙與綠豆顆粒般破碎。
+                      </div>
+                    </div>
+
+                    <div class="t-row" data-row="bottom">
+                      <div class="t-rowMain">
+                        <span class="t-bracket">仙草凍：水庫淤積</span>
+                      </div>
+                      <div class="t-rowDesc">
+                        曾文水庫攔砂蓄水，砂石層層沉積於庫底。
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dot Section -->
+        <section class="t-section t-riverDots">
+          <div class="grid-container t-riverDots__inner">
+            <img class="t-riverDot" src="img/stones/W.svg" alt="" />
+            <img class="t-riverDot" src="img/stones/W.svg" alt="" />
+          </div>
+        </section>
+
+        <!-- Text Section -->
+        <section class="t-section t-riverNav">
+          <div class="grid-container t-riverNav__grid">
+            <div class="t-riverNav__left">
+              <p class="t-riverNav__text">RIVER INFORMATION<br />DETAIL</p>
+            </div>
+
+            <div class="t-riverNav__center">
+              <p class="t-riverNav__text">(S6)</p>
+            </div>
+
+            <div class="t-riverNav__right">
+              <p class="t-riverNav__text">EAST RIVER’S<br />DETAIL</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="t-section">
+          <div class="grid-container">
+            <div class="col-1-5">
+              <img class="t-img" src="img/map/06.png" alt="" />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="t-cta">
+        <a href="./motion/06.html" class="t-cta__link">
+          <div class="glow">
+            <span class="t-cta__glow" id="zengwen" aria-hidden="true"></span>
+          </div>
+
+          <div class="t-cta__card">
+            <div class="t-cta__dots" aria-hidden="true">
+              <img class="t-cta__dot" src="img/stones/W.svg" alt="" />
+              <img class="t-cta__dot" src="img/stones/W.svg" alt="" />
+            </div>
+
+            <div class="t-cta__titleWrap">
+              <div class="t-cta__titleEn">MAKE DRINK</div>
+              <button class="t-cta__titleZh" type="button">
+                <img src="img/start-ch.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </a>
+      </footer>
+    </div>
+    <script src="js/debug.js"></script>
+    <script src="js/drink-config.js"></script>
+    <script src="js/interaction.js"></script>
+  </body>
+</html>
