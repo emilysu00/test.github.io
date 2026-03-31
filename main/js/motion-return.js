@@ -12,11 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hasScheduledRedirect) return;
     hasScheduledRedirect = true;
 
-    console.log("[motion-return] Video ended. Returning to pre.html in 30 seconds...");
+    console.log(
+      "[motion-return] Video ended. Returning to pre.html in 15 seconds...",
+    );
 
     redirectTimer = window.setTimeout(() => {
       window.location.href = "../pre.html";
-    }, 30000);
+    }, 15000);
   }
 
   video.addEventListener("ended", scheduleReturn);
