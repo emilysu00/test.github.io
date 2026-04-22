@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     hasScheduledRedirect = true;
 
     console.log(
-      "[motion-return] Video ended. Returning to pre.html in 15 seconds...",
+      "[motion-return] Video ended. Returning to index.html in 15 seconds...",
     );
 
     redirectTimer = window.setTimeout(() => {
-      window.location.href = "../pre.html";
+      window.location.href = "../index.html";
     }, 15000);
   }
 

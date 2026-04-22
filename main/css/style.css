@@ -1098,7 +1098,7 @@ body.debug .grid-overlay {
   color: var(--c-primary);
   text-align: center;
 
-  animation: enGlow 1s ease-in infinite alternate;
+  animation: enGlow 1s infinite alternate;
   will-change: text-shadow, filter, transform;
 }
 @keyframes enGlow {
@@ -1109,8 +1109,8 @@ body.debug .grid-overlay {
   100% {
     text-shadow:
       0 0 6px rgba(255, 255, 255, 0.5),
-      0 0 20px rgba(90, 90, 90, 0.25),
-      0 0 60px rgba(0, 0, 0, 0.16);
+      0 0 40px rgba(150, 150, 150, 0.3),
+      0 0 60px rgba(0, 0, 0, 0.35);
   }
 }
 .t-cta__titleZh {
@@ -1132,7 +1132,7 @@ body.debug .grid-overlay {
 
 .t-cta__titleZh img {
   display: block;
-  animation: zhGlow 1s ease-in infinite alternate;
+  animation: zhGlow 1s infinite alternate;
   will-change: filter, transform;
   height: 44px;
 }
@@ -1143,8 +1143,8 @@ body.debug .grid-overlay {
   }
 
   100% {
-    filter: brightness(1.12) drop-shadow(0 0 18px rgba(255, 255, 255, 0.35))
-      drop-shadow(0 0 90px rgba(0, 0, 0, 0.5));
+    filter: brightness(1.12) drop-shadow(0 0 18px rgba(255, 255, 255, 0.5))
+      drop-shadow(0 0 90px rgba(104, 104, 104, 0.5));
   }
 }
 

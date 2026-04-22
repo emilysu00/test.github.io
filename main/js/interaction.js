@@ -14,26 +14,25 @@
   function resolveSettings(control, root, range) {
     const variant = control.dataset.variant || root?.dataset.variant || "1200";
     const config = CONFIGS[variant] || {};
-    const max = toNumber(config.max, toNumber(control.dataset.max, toNumber(range.max, 100)));
+    const max = toNumber(
+      config.max,
+      toNumber(control.dataset.max, toNumber(range.max, 100)),
+    );
     const initial = clamp(
-      toNumber(config.initial, toNumber(control.dataset.value, toNumber(range.value, 0))),
+      toNumber(
+        config.initial,
+        toNumber(control.dataset.value, toNumber(range.value, 0)),
+      ),
       0,
       max,
     );
-    const scale = Array.isArray(config.scale) && config.scale.length === 3
-      ? config.scale
-      : [max, Math.round(max / 2), 0];
+    const scale =
+      Array.isArray(config.scale) && config.scale.length === 3
+        ? config.scale
+        : [max, Math.round(max / 2), 0];
     const thresholds = {
-      bottom: clamp(
-        toNumber(config.thresholds?.bottom, max * 0.18),
-        0,
-        max,
-      ),
-      top: clamp(
-        toNumber(config.thresholds?.top, max * 0.55),
-        0,
-        max,
-      ),
+      bottom: clamp(toNumber(config.thresholds?.bottom, max * 0.18), 0, max),
+      top: clamp(toNumber(config.thresholds?.top, max * 0.55), 0, max),
     };
     const unit = control.dataset.unit || "ml";
 
@@ -87,10 +86,13 @@
 
     function updateFill(value) {
       const fillRatio = clamp(value / settings.max, 0, 1);
-      liquidMask.style.setProperty("--fill", `${(fillRatio * 100).toFixed(2)}%`);
+      liquidMask.style.setProperty(
+        "--fill",
+        `${(fillRatio * 100).toFixed(2)}%`,
+      );
 
       if (liquidSurface) {
-        liquidSurface.style.opacity = fillRatio <= 0.01 ? "0" : "0.55";
+        liquidSurface.style.opacity = fillRatio <= 0.01 ? "0" : "0.9";
       }
     }
 
@@ -106,7 +108,11 @@
     }
 
     function updateUI() {
-      const value = clamp(toNumber(range.value, settings.initial), 0, settings.max);
+      const value = clamp(
+        toNumber(range.value, settings.initial),
+        0,
+        settings.max,
+      );
       range.value = String(value);
       control.dataset.value = String(value);
 

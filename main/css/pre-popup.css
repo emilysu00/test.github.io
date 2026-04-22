@@ -56,8 +56,7 @@
 }
 
 .pre-popup--ins {
-  right: 58px;
-  width: 310px;
+  right: 42px;
 }
 
 .pre-popup__panel {
@@ -100,11 +99,11 @@
 }
 
 .pre-popup__qr {
-  width: 170px;
-  height: 170px;
+  width: 240px;
+  height: 240px;
   display: block;
   object-fit: contain;
-  image-rendering: crisp-edges;
+  opacity: 85%;
 }
 
 .pre-popup__hint {
